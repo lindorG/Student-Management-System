@@ -1,0 +1,156 @@
+package jpa.mainrunner;
+
+import jpa.service.CourseService;
+import jpa.service.StudentService;
+
+import java.util.Scanner;
+
+public class SMSRunner {
+
+    public static void main(String[] args) throws InterruptedException {
+        CourseService courseService = new CourseService();
+        StudentService studentService = new StudentService();
+
+//        // 1. Prints all students
+//        System.out.println(studentService.getAllStudents());
+
+//        // 2. Prints students based on a specified email
+//        System.out.println(studentService.getStudentByEmail("aiannitti7@is.gd"));
+
+        // 3. Validates inputted credentials
+//        System.out.println(studentService.validateStudent("qllorens2@howstuffworks.com", "W6rJuxd"));
+
+        // 4. Registers a student and does not register them if they're already registered to selected course
+//        studentService.registerStudentToCourse("aiannitti7@is.gd", 1);
+
+        // 5. Lists the courses a student is currently registered to
+        System.out.println(studentService.getStudentCourses("aiannitti7@is.gd"));
+
+//        // 6. Prints all courses
+//        System.out.println(courseService.getAllCourses());
+
+
+
+        display();
+    }
+
+    public static void menu() {
+        System.out.println("Welcome!");
+        System.out.println("This is our school's management system");
+        System.out.println();
+        System.out.println("Are you a(n)");
+        System.out.println("1. Student");
+        System.out.println("2. quit");
+    }
+
+    public static void loginMenu() {
+        System.out.println();
+        System.out.println("Welcome!");
+        System.out.println("Please select one of the following options");
+        System.out.println();
+        System.out.println("1. Register to Class");
+        System.out.println("2. Logout");
+    }
+
+    public static void registerMenu() {
+        System.out.println();
+        System.out.println("Which course?");
+    }
+
+    public static void display() throws InterruptedException {
+        CourseService courseService = new CourseService();
+        StudentService studentService = new StudentService();
+        Scanner reader = new Scanner(System.in);
+
+        int choice = 0;
+
+        while (choice != 2) {
+            menu();
+            choice = reader.nextInt();
+            switch (choice) {
+                case 1:
+                    reader.nextLine();
+                    System.out.print("\nEnter Your Email:\n");
+                    String inputEmail = reader.nextLine();
+                    System.out.print("\nEnter Your Password:\n");
+                    String inputPassword = reader.nextLine();
+                    boolean verify = studentService.validateStudent(inputEmail, inputPassword);
+                    if (verify) {
+                        System.out.println("My Classes:");
+                        System.out.println(studentService.getStudentCourses(inputEmail));
+                        while (choice != 2) {
+                            loginMenu();
+                            choice = reader.nextInt();
+                            switch (choice) {
+                                case 1:
+                                    System.out.println("Please choose the class you wish to register to");
+                                    System.out.println("All Courses:");
+                                    scourseService.getAllCourses();
+                                    registerMenu();
+                                    while (choice != 2) {
+                                        loginMenu();
+                                        choice = reader.nextInt();
+                                        switch (choice) {
+                                            case 1:
+                                                 studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 2:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 3:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 4:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 5:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 6:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 7:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 8:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 9:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            case 10:
+                                                studentService.registerStudentToCourse(inputEmail, choice);
+                                                System.out.println("You've successfully registered to our English course!");
+                                            default:
+                                                System.out.println("You've entered an invalid input to the system. Please try again");
+                                                Thread.sleep(2000);
+                                                display();
+                                        }
+                                    }
+                                case 2:
+                                    loginMenu();
+                                default:
+                                    System.out.println("You've entered an invalid input to the system. Please try again");
+                                    Thread.sleep(2000);
+                                    display();
+                            }
+                        }
+                    } else {
+                        System.out.println("Incorrect username or password.");
+                        System.out.println("Please try again");
+                        Thread.sleep(2000);
+                        display();
+                        System.out.println();
+                    }
+                case 2:
+                    System.out.println("\nGoodbye");
+                    break;
+                default:
+                    System.out.println("You've entered an invalid input to the system. Please try again");
+                    Thread.sleep(2000);
+                    display();
+            }
+        }
+        reader.close();
+    }
+}
